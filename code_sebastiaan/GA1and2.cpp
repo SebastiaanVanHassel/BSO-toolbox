@@ -128,81 +128,81 @@ class individual_GA1 {
             double fitness;
 
         // ------------ begin fitness Orthogonal --------------- //
-        //     
-        //     int score_nx = 0; int score_ny = 0; int score_nz = 0;
-        //  // X:
-        //     if ((points8[0][0] == points8[1][0]) && (points8[0][0] == points8[2][0]) && (points8[0][0] == points8[3][0]) ) {score_nx++  ;}
-        //     if ((points8[4][0] == points8[5][0]) && (points8[4][0] == points8[6][0]) && (points8[4][0] == points8[7][0]) ) {score_nx++  ;}
-        //     if (points8[0][0] == points8[4][0]) {score_nx-=1 ;}     // avoid line instead of rectangle
-        //  // Y:
-        //     if ((points8[0][1] == points8[1][1]) && (points8[0][1] == points8[4][1]) && (points8[0][1] == points8[5][1]) ) {score_ny++  ;}
-        //     if ((points8[2][1] == points8[3][1]) && (points8[2][1] == points8[6][1]) && (points8[2][1] == points8[7][1]) ) {score_ny++  ;}
-        //     if (points8[0][1] == points8[2][1]) {score_ny-=1 ;}     
-        //  // Z:
-        //     if ((points8[0][2] == points8[2][2]) && (points8[0][2] == points8[4][2]) && (points8[0][2] == points8[6][2]) ) {score_nz++  ;}
-        //     if ((points8[1][2] == points8[3][2]) && (points8[1][2] == points8[5][2]) && (points8[1][2] == points8[7][2]) ) {score_nz++  ;}
-        //     if (points8[0][2] == points8[1][2]) {score_nz-=1 ;}
-
-        //     fitness =  4 + score_nx + score_ny + score_nz ;       ;
-        // ------------ end   fitness Orthogonal --------------- //
-
-
-        // ------------ begin fitness NON-Orthogonal --------------- //
+            
             int score_nx = 0; int score_ny = 0; int score_nz = 0;
-        // Walls are VERTICAL
          // X:
-            if (points8[0][0] == points8[1][0]) {score_nx++  ;}
-            if (points8[2][0] == points8[3][0]) {score_nx++  ;}
-            if (points8[4][0] == points8[5][0]) {score_nx++  ;}
-            if (points8[6][0] == points8[7][0]) {score_nx++  ;}
-            // prevent duplicates, 4 unique 'columns'
-            if ( (points8[0][0] == points8[2][0]) && (points8[0][0] == points8[4][0]) && (points8[0][0] == points8[6][0]) ) {score_nx-=1 ;}  
-            // avoid line (3 points on one) instead of rectangle
-            if ((points8[0][0] == points8[2][0]) && (points8[0][0] == points8[4][0])) {score_nx-=1 ;}     
-            if ((points8[0][0] == points8[2][0]) && (points8[0][0] == points8[6][0])) {score_nx-=1 ;}
-            if ((points8[0][0] == points8[4][0]) && (points8[0][0] == points8[6][0])) {score_nx-=1 ;}  
-            if ((points8[2][0] == points8[4][0]) && (points8[2][0] == points8[6][0])) {score_nx-=1 ;}
+            if ((points8[0][0] == points8[1][0]) && (points8[0][0] == points8[2][0]) && (points8[0][0] == points8[3][0]) ) {score_nx++  ;}
+            if ((points8[4][0] == points8[5][0]) && (points8[4][0] == points8[6][0]) && (points8[4][0] == points8[7][0]) ) {score_nx++  ;}
+            if (points8[0][0] == points8[4][0]) {score_nx-=1 ;}     // avoid line instead of rectangle
          // Y:
-            if (points8[0][1] == points8[1][1]) {score_ny++  ;}
-            if (points8[2][1] == points8[3][1]) {score_ny++  ;}
-            if (points8[4][1] == points8[5][1]) {score_ny++  ;}
-            if (points8[6][1] == points8[7][1]) {score_ny++  ;}
-            if ( (points8[0][1] == points8[2][1]) && (points8[0][1] == points8[4][1]) && (points8[0][1] == points8[6][1]) ) {score_ny-=1 ;}  
-            if ((points8[0][1] == points8[2][1]) && (points8[0][1] == points8[4][1])) {score_ny-=1 ;}     
-            if ((points8[0][1] == points8[2][1]) && (points8[0][1] == points8[6][1])) {score_ny-=1 ;}   
-            if ((points8[0][1] == points8[4][1]) && (points8[0][1] == points8[6][1])) {score_ny-=1 ;}   
-            if ((points8[2][1] == points8[4][1]) && (points8[2][1] == points8[6][1])) {score_ny-=1 ;}    
-       
-        // Floors are HORIZONTAL
+            if ((points8[0][1] == points8[1][1]) && (points8[0][1] == points8[4][1]) && (points8[0][1] == points8[5][1]) ) {score_ny++  ;}
+            if ((points8[2][1] == points8[3][1]) && (points8[2][1] == points8[6][1]) && (points8[2][1] == points8[7][1]) ) {score_ny++  ;}
+            if (points8[0][1] == points8[2][1]) {score_ny-=1 ;}     
          // Z:
             if ((points8[0][2] == points8[2][2]) && (points8[0][2] == points8[4][2]) && (points8[0][2] == points8[6][2]) ) {score_nz++  ;}
             if ((points8[1][2] == points8[3][2]) && (points8[1][2] == points8[5][2]) && (points8[1][2] == points8[7][2]) ) {score_nz++  ;}
             if (points8[0][2] == points8[1][2]) {score_nz-=1 ;}
 
-        // CHECK 3 vertices on one LINE
-            bso::utilities::geometry::vertex vx1 = {points8[0][0], points8[0][1], points8[0][2]};
-            bso::utilities::geometry::vertex vx2 = {points8[2][0], points8[2][1], points8[2][2]};
-            bso::utilities::geometry::vertex vx3 = {points8[4][0], points8[4][1], points8[4][2]};
-            bso::utilities::geometry::vertex vx4 = {points8[6][0], points8[6][1], points8[6][2]};
-            int score_nL = 0;
-            bso::utilities::geometry::line_segment lineA = {vx1, vx2};
-            bso::utilities::geometry::line_segment lineB = {vx2, vx4};
-            bso::utilities::geometry::line_segment lineC = {vx4, vx3};
-            bso::utilities::geometry::line_segment lineD = {vx3, vx1};
-            bso::utilities::geometry::vector vectorA = lineA.getVector();
-            bso::utilities::geometry::vector vectorB = lineB.getVector();
-            bso::utilities::geometry::vector vectorC = lineC.getVector();
-            bso::utilities::geometry::vector vectorD = lineD.getVector();
-            if (vectorA.isParallel(vectorB))
-            { score_nL-=1; }
-            if (vectorB.isParallel(vectorC))
-            { score_nL-=1; }
-            if (vectorC.isParallel(vectorD))
-            { score_nL-=1; }
-            if (vectorD.isParallel(vectorA))
-            { score_nL-=1; }
+            fitness =  4 + score_nx + score_ny + score_nz ;       ;
+        // ------------ end   fitness Orthogonal --------------- //
+
+
+        // ------------ begin fitness NON-Orthogonal --------------- //
+//             int score_nx = 0; int score_ny = 0; int score_nz = 0;
+//         // Walls are VERTICAL
+//          // X:
+//             if (points8[0][0] == points8[1][0]) {score_nx++  ;}
+//             if (points8[2][0] == points8[3][0]) {score_nx++  ;}
+//             if (points8[4][0] == points8[5][0]) {score_nx++  ;}
+//             if (points8[6][0] == points8[7][0]) {score_nx++  ;}
+//             // prevent duplicates, 4 unique 'columns'
+//             if ( (points8[0][0] == points8[2][0]) && (points8[0][0] == points8[4][0]) && (points8[0][0] == points8[6][0]) ) {score_nx-=1 ;}  
+//             // avoid line (3 points on one) instead of rectangle
+//             if ((points8[0][0] == points8[2][0]) && (points8[0][0] == points8[4][0])) {score_nx-=1 ;}     
+//             if ((points8[0][0] == points8[2][0]) && (points8[0][0] == points8[6][0])) {score_nx-=1 ;}
+//             if ((points8[0][0] == points8[4][0]) && (points8[0][0] == points8[6][0])) {score_nx-=1 ;}  
+//             if ((points8[2][0] == points8[4][0]) && (points8[2][0] == points8[6][0])) {score_nx-=1 ;}
+//          // Y:
+//             if (points8[0][1] == points8[1][1]) {score_ny++  ;}
+//             if (points8[2][1] == points8[3][1]) {score_ny++  ;}
+//             if (points8[4][1] == points8[5][1]) {score_ny++  ;}
+//             if (points8[6][1] == points8[7][1]) {score_ny++  ;}
+//             if ( (points8[0][1] == points8[2][1]) && (points8[0][1] == points8[4][1]) && (points8[0][1] == points8[6][1]) ) {score_ny-=1 ;}  
+//             if ((points8[0][1] == points8[2][1]) && (points8[0][1] == points8[4][1])) {score_ny-=1 ;}     
+//             if ((points8[0][1] == points8[2][1]) && (points8[0][1] == points8[6][1])) {score_ny-=1 ;}   
+//             if ((points8[0][1] == points8[4][1]) && (points8[0][1] == points8[6][1])) {score_ny-=1 ;}   
+//             if ((points8[2][1] == points8[4][1]) && (points8[2][1] == points8[6][1])) {score_ny-=1 ;}    
+       
+//         // Floors are HORIZONTAL
+//          // Z:
+//             if ((points8[0][2] == points8[2][2]) && (points8[0][2] == points8[4][2]) && (points8[0][2] == points8[6][2]) ) {score_nz++  ;}
+//             if ((points8[1][2] == points8[3][2]) && (points8[1][2] == points8[5][2]) && (points8[1][2] == points8[7][2]) ) {score_nz++  ;}
+//             if (points8[0][2] == points8[1][2]) {score_nz-=1 ;}
+
+//         // CHECK 3 vertices on one LINE
+//             bso::utilities::geometry::vertex vx1 = {points8[0][0], points8[0][1], points8[0][2]};
+//             bso::utilities::geometry::vertex vx2 = {points8[2][0], points8[2][1], points8[2][2]};
+//             bso::utilities::geometry::vertex vx3 = {points8[4][0], points8[4][1], points8[4][2]};
+//             bso::utilities::geometry::vertex vx4 = {points8[6][0], points8[6][1], points8[6][2]};
+//             int score_nL = 0;
+//             bso::utilities::geometry::line_segment lineA = {vx1, vx2};
+//             bso::utilities::geometry::line_segment lineB = {vx2, vx4};
+//             bso::utilities::geometry::line_segment lineC = {vx4, vx3};
+//             bso::utilities::geometry::line_segment lineD = {vx3, vx1};
+//             bso::utilities::geometry::vector vectorA = lineA.getVector();
+//             bso::utilities::geometry::vector vectorB = lineB.getVector();
+//             bso::utilities::geometry::vector vectorC = lineC.getVector();
+//             bso::utilities::geometry::vector vectorD = lineD.getVector();
+//             if (vectorA.isParallel(vectorB))
+//             { score_nL-=1; }
+//             if (vectorB.isParallel(vectorC))
+//             { score_nL-=1; }
+//             if (vectorC.isParallel(vectorD))
+//             { score_nL-=1; }
+//             if (vectorD.isParallel(vectorA))
+//             { score_nL-=1; }
             
-            fitness = score_nx + score_ny + score_nz + score_nL;
+//             fitness = score_nx + score_ny + score_nz + score_nL;
         // ------------ end   fitness NON-Orthogonal --------------- //
    
             return fitness;
@@ -942,7 +942,7 @@ int main(int argc, char *argv[])
 
  // GA1 : Quad-Hexahedrons
     // Input Parameters
-    int N = 128;                                // Population size
+    int N = 512;                                // Population size
     int g = 0;                                  // generation counter
     vector<int> cho = {0,0,0};                  // crossover indicator
     int n = 100;                                // after n generations where no new unique Quad-Hexahedron is found, GA1 stops
