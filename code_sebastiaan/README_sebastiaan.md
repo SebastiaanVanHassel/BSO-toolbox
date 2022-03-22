@@ -60,6 +60,8 @@ The files can be compiled and ran by typing the following commands in the termin
 | GA1and2.cpp	              | make clean ga	         | ./algo	       |
 | Visualisation_GA.cpp	    | make clean viga	       | ./visualGA    |
 
+Furthermore, the directory of code_sebastiaan contains two initial text-files: "input_BSD_ML.txt" and "cornerverticesBSD_GA.txt". These files are used as input for the two methods to predict the conformal representation of Test building 'A' and Test building 'A-O', as described in the analysis of the related MSc. Thesis.
+
 ## Example Machine Learning (ML)
 The machine learning code consists of five C++ files, which are compiled separately. The filenames are listed below, and they are generally used in this order:
 *	“generateBSDs_ML.cpp”
@@ -127,4 +129,6 @@ Output text-files:
 
 #### "visualisation_GA.cpp"
 The BSD, point cloud, and found conformal model can be visualised. The input for the visualisation is the “bsd.txt”, “pnts.txt”, or “cf.txt” text-file.
+In the figure below, one can see the generated conformal model by the GA ("cf.txt") and point cloud ("pnts.txt").
+![image](https://user-images.githubusercontent.com/101708661/159507167-03b1b30b-f98a-4ce1-a9d1-28add9d59f17.png)
 
