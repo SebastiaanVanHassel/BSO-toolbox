@@ -27,11 +27,13 @@ The code consists of two individual parts with respect to the research methods: 
 | GA1and2.cpp	              | GA	         | Linux	            |        x							|									|										|									|
 | Visualisation_GA.cpp	    | GA	         | Linux			        |                       |                 |          x				|									|
 
+#### Operating system
 Most of the files make use of a Linux operating system. These files are compiled on a server at the University. The two Neural Network files, which include the mlpack C++ library make use of a Windows operating system. The mlpack library is not installed on the server of the University and therefore, installed and used on the personal computer (Windows OS) of the author.
 
+#### External software
 Overview of external software:
 *	BSO-toolbox developed at Eindhoven University of Technology
-	-	See https://github.com/TUe-excellent-buildings/BSO-toolbox for documentation and installa-tion guide.
+	-	See https://github.com/TUe-excellent-buildings/BSO-toolbox for documentation and installation guide.
 	-	Version = v1.0.0
 *	Eigen C++ library for linear algebra. (Installed with the BSO-toolbox installation)
 	-	Version = v3.4.0
@@ -49,7 +51,8 @@ Overview of external software:
 		*	Ensmallen C++ numerical optimization library (v2.14.2)
 		*	Boost C++ library (v1.75.0)
 
-A make file has been added to the directory of code_sebastiaan, which can be used to compile the code that use Linux OS. In the makefile, check if the dependencies (Eigen, Boost and BSO-toolbox) are linked to the locations of your local machine. 
+#### Makefile (Linux)
+A make file has been added to the directory of code_sebastiaan, which can be used to compile the code that use Linux operating system. In the makefile, check if the dependencies (Eigen, Boost and BSO-toolbox) are linked to the locations of your local machine. 
 
 The files can be compiled and ran by typing the following commands in the terminal:
 | File name	                | Compile	     					 | Run	  			 |
@@ -60,7 +63,10 @@ The files can be compiled and ran by typing the following commands in the termin
 | GA1and2.cpp	              | make clean ga	         | ./algo	       |
 | Visualisation_GA.cpp	    | make clean viga	       | ./visualGA    |
 
+#### Input text-files
 Furthermore, the directory of code_sebastiaan contains two initial text-files: "input_BSD_ML.txt" and "cornerverticesBSD_GA.txt". These files are used as input for the two methods to predict the conformal representation of Test building 'A' and Test building 'A-O', as described in the analysis of the related MSc. Thesis.
+
+
 
 ## Example Machine Learning (ML)
 The machine learning code consists of five C++ files, which are compiled separately. The filenames are listed below, and they are generally used in this order:
