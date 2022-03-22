@@ -68,34 +68,63 @@ The machine learning code consists of five C++ files, which are compiled separat
 *	“NeuralNetwork_PREDICT.cpp”
 *	“visualisation_ML.cpp”
 See figure below for an overview of all C++ files, input and output files and the used libraries.
-![image](https://user-images.githubusercontent.com/101708661/159466691-23ec21e9-b8b7-4536-b24f-6b1134e3f5c7.png)
+![image](https://user-images.githubusercontent.com/101708661/159500771-6991e3d3-a303-4eb0-bdab-93b7b959865a.png)
 
 #### "generateBSDs_ML.cpp"
 The ML method starts with "generateBSDs_ML.cpp" to define a wide range of building configurations. 
 The file "generateBSDs_ML.cpp" in this directory generates 100 BSDs with 2 spaces for each variant: "top", "front", "behind", "left", "right".
-The width and depth range from 4000 - 8000 mm, and the height from 2000 - 6000 mm.
+The width and depth range between 4000 - 8000 mm, and the height between 2000 - 6000 mm.
 The output is a textfile: “origin_dimensions_BSDs_ML.txt”, which includes the input for next C++ file (“generateDataset_ML.cpp”).
 
 #### "generateDataset_ML.cpp"
 A dataset with input features (BSDs) and output targets (conformal models) can be created by "generateDataset_ML.cpp".
-For each BSD, the transformation to its conformal geometry is executed by the BSO-toolbox. As a result, the input features and output targets are saved.
+For each BSD, the transformation to its conformal geometry is executed by the BSO-toolbox. As a result, the input features and output targets are saved in the following text-files.
 
 Input text-files (features):
-*	“inputBSD.txt”
-*	“inputBSD_NumberEncoded.txt”
-*	“inputBSD_OneHotEncoded.txt”
+*	“inputBSD_ML.txt”
+*	“inputBSD_NumberEncoded_ML.txt”
+*	“inputBSD_OneHotEncoded_ML.txt”
 *	“cornerverticesBSD_ML.txt”
 
 Output text-files (targets):
-*	“outputCF.txt”
+*	“outputCF_ML.txt”
 
 #### "NeuralNetwork_TRAIN.cpp"
-The features (“inputBSD.txt”) and targets (“outputCF.txt”) are used as dataset to train the Neural network. Finally, a trained ML model is saved, which then can be used to make predictions of conformal models (see “NeuralNetwork_PREDICT.cpp”). Additionally, the loss (MSE) is calculated during the training process and saved in “mse.txt”.
+The resulting text-files from previous C++ file are copied and pasted to the Visual Studio 19 project on Windows 10 OS, where all the dependencies of mlpack library are installed.
+The features (“inputBSD_ML.txt”) and targets (“outputCF_ML.txt”) are used as dataset to train the Neural network. Finally, a trained ML model is saved, which then can be used to make predictions of conformal models (see “NeuralNetwork_PREDICT.cpp”). Additionally, the loss (MSE) is calculated during the training process and saved in “MSE.txt”.
 
 #### "NeuralNetwork_PREDICT.cpp"
-With the trained ML model (“trained_ML_model.xml”), a test building can be used as input to predict its conformal (CF) representation (“predictionCF.txt”).
-A test building ("test_inputBSD.txt") is added to the directory.
+With the trained ML model (“trained_ML_model.xml”), a test building can be used as input to predict its conformal (CF) representation (“predictionCF_ML.txt”).
+Test building 'A', as used in the MSc. Thesis, is described in "test_inputBSD_ML.txt" and added to the directory.
 
 #### "visualisation_ML.cpp"
-The predicted CF model can be visualised. The input for the visualisation is the “predictionCF.txt”-file. 
+The predicted CF model of test building 'A' is visualised below. The input for the visualisation is the “predictionCF_ML.txt”-file. 
+![image](https://user-images.githubusercontent.com/101708661/159496119-2ffb1bb1-bc09-47d9-8daf-b05120774279.png)
+
+
+## Example Genetic Algorithm (GA)
+The GA code consists of two C++ files, which are compiled separately. One for the both GAs, and one for the visualisation of the BSD and CF model. 
+
+![image](https://user-images.githubusercontent.com/101708661/159501430-a6ce70a4-9ff6-4f2c-9e3d-e29ebef1d29e.png)
+
+
+#### "GA1and2.cpp"
+Both GAs are structured in the same file. The simulations of GA1 and GA2 are ran in succession. The corner-vertices (p) of the spaces of a BSD (“cornerverticesBSD_GA.txt”) are used as input for the GA. 
+
+Test building 'A-O', as used in the MSc. Thesis, described as “cornerverticesBSD_GA.txt”:
+*  N,	1,	10,10,0,  16,10,0,  16,16,0,  10,16,0,  10,10,3,  16,10,3,  16,16,3,  10,16,3
+*  N,	2,	16,12,0,  22,12,0,  22,18,0,  16,18,0,  16,12,5,  22,12,5,  22,18,5,  16,18,5
+
+The GA tries to find a conformal representation. If a CF geometry is found, it is saved in “cf.txt”-file, and can be used for visualisation. Additionally, the BSD corner-vertices are saved in “bsd.txt”, and the point cloud is saved in “pnts.txt”. All can be used as input for “visualisation_GA.cpp”.
+
+Input text-files:
+*	“cornerverticesBSD_GA.txt”
+
+Output text-files: 
+*	“bsd.txt”
+*	“pnts.txt”
+*	“cf.txt”
+
+#### "visualisation_GA.cpp"
+The BSD, point cloud, and found conformal model can be visualised. The input for the visualisation is the “bsd.txt”, “pnts.txt”, or “cf.txt” text-file.
 
