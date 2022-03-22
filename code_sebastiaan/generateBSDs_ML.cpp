@@ -15,7 +15,7 @@ using namespace std;
 // 5 Different variants: 'top' || 'front' || 'behind' || 'left' || 'right' 
 
 // Input Parameters
-int nBSDs = 20;            // nr. of Building Spatial Designs (BSDs) per variant.
+int nBSDs = 100;            // nr. of Building Spatial Designs (BSDs) per variant.
 int nSpaces = 2;            // nr. of spaces in BSD. Currently, fixed to 2
 int step = 1000;            // The step in the dimensions range. 
                             // --> For example, if the width ranges from 4000-8000, the values 4000, 5000, 6000, 7000, and 8000 are considered
