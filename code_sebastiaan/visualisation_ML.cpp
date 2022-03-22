@@ -16,7 +16,7 @@ vector<vector<vector<float>>> predictionCF_ML()
     // Load predicted data
     vector<string> predictedCoordinatesString;
     string coordinate;
-    ifstream predictC("predictionCF.txt");
+    ifstream predictC("predictionCF_ML.txt");
     while ( !predictC.eof() )
     {
         while ( getline(predictC,coordinate) )
@@ -53,7 +53,7 @@ vector<float> allvertices()
 {
     vector<string> predictedCoordinatesString;
     string coordinate;
-    ifstream predictC("predictionCF.txt");
+    ifstream predictC("predictionCF_ML.txt");
     while ( !predictC.eof() )
     {
         while ( getline(predictC,coordinate) )
