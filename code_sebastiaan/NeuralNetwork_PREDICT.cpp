@@ -41,7 +41,7 @@ int main()
 	
 	
 	// SCALE features (same as features where model is trained on: "inputBSD.txt")
-	mat features; data::Load("inputBSD.txt", features);
+	mat features; data::Load("inputBSD_ML.txt", features);
 	mat scaledfeaturesTest;
 	mlpack::data::MeanNormalization scaler;
 	scaler.Fit(features);
@@ -58,7 +58,7 @@ int main()
 
 
 	// Write prediction to file 
-	ofstream predictionf("predictionCF.txt", ios::trunc);
+	ofstream predictionf("predictionCF_ML.txt", ios::trunc);
 	for (int i = 0; i < prediction.size(); i++)
 	{
 		if (i < prediction.size() - 1) {
