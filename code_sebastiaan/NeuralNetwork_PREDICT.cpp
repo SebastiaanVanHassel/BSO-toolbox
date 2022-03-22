@@ -37,7 +37,7 @@ int main()
 
 
 	// LOAD features of test building that needs to be predicted
-	mat featuresTest; data::Load("test_inputBSD.txt", featuresTest);
+	mat featuresTest; data::Load("test_inputBSD_ML.txt", featuresTest);
 	
 	
 	// SCALE features (same as features where model is trained on: "inputBSD.txt")
