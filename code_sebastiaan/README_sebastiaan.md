@@ -49,4 +49,18 @@ Overview of external software:
 		*	Ensmallen C++ numerical optimization library (v2.14.2)
 		*	Boost C++ library (v1.75.0)
 
+## Example Machine Learning (ML)
+The machine learning code consists of five C++ files, which are compiled separately. The filenames are listed below, and they are generally used in this order:
+*	“generateBSDs_ML.cpp”
+*	“generateDataset_ML.cpp”
+*	“NeuralNetwork_TRAIN.cpp”
+*	“NeuralNetwork_PREDICT.cpp”
+*	“visualisation_ML.cpp”
+See figure below for an overview of all C++ files, input and output files and the used libraries.
+![image](https://user-images.githubusercontent.com/101708661/159466691-23ec21e9-b8b7-4536-b24f-6b1134e3f5c7.png)
+
+The ML method starts with "generateBSDs_ML.cpp" to define a wide range of building configurations. Thereafter, a dataset with input features (BSDs) and output targets (conformal models) can be created by "generateDataset_ML.cpp".
+In the ML analysis, the input consists of BSDs described by origin (s) and dimensions vector (d). An example of such input file to created a building with two spaces is considered here ( R, space, width, depth, height, x, y, z, A ):
+* R, 1, 6000, 5000, 5000, 10000, 10000, 0, A
+* R, 2, 6000, 7000, 3000, 9000, 5000, 5000, A
 
