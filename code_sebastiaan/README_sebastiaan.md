@@ -49,6 +49,17 @@ Overview of external software:
 		*	Ensmallen C++ numerical optimization library (v2.14.2)
 		*	Boost C++ library (v1.75.0)
 
+A make file has been added to the directory of code_sebastiaan, which can be used to compile the code that use Linux OS. In the makefile, check if the dependencies (Eigen, Boost and BSO-toolbox) are linked to the locations of your local machine. 
+
+The files can be compiled and ran by typing the following commands in the terminal:
+| File name	                | Compile	     					 | Run	  			 |
+| ---												|	---					 				   | ---					 |
+| generateBSDs_ML.cpp	      | make clean design	     | ./bsd			   |
+| generateDataset_ML.cpp	  | make clean data		     | ./dataset	   |
+| Visualisation_ML.cpp	    | make clean viml	       | ./visualML	   |
+| GA1and2.cpp	              | make clean ga	         | ./algo	       |
+| Visualisation_GA.cpp	    | make clean viga	       | ./visualGA    |
+
 ## Example Machine Learning (ML)
 The machine learning code consists of five C++ files, which are compiled separately. The filenames are listed below, and they are generally used in this order:
 *	“generateBSDs_ML.cpp”
@@ -59,8 +70,32 @@ The machine learning code consists of five C++ files, which are compiled separat
 See figure below for an overview of all C++ files, input and output files and the used libraries.
 ![image](https://user-images.githubusercontent.com/101708661/159466691-23ec21e9-b8b7-4536-b24f-6b1134e3f5c7.png)
 
-The ML method starts with "generateBSDs_ML.cpp" to define a wide range of building configurations. Thereafter, a dataset with input features (BSDs) and output targets (conformal models) can be created by "generateDataset_ML.cpp".
-In the ML analysis, the input consists of BSDs described by origin (s) and dimensions vector (d). An example of such input file to created a building with two spaces is considered here ( R, space, width, depth, height, x, y, z, A ):
-* R, 1, 6000, 5000, 5000, 10000, 10000, 0, A
-* R, 2, 6000, 7000, 3000, 9000, 5000, 5000, A
+#### "generateBSDs_ML.cpp"
+The ML method starts with "generateBSDs_ML.cpp" to define a wide range of building configurations. 
+The file "generateBSDs_ML.cpp" in this directory generates 100 BSDs with 2 spaces for each variant: "top", "front", "behind", "left", "right".
+The width and depth range from 4000 - 8000 mm, and the height from 2000 - 6000 mm.
+The output is a textfile: “origin_dimensions_BSDs_ML.txt”, which includes the input for next C++ file (“generateDataset_ML.cpp”).
+
+#### "generateDataset_ML.cpp"
+A dataset with input features (BSDs) and output targets (conformal models) can be created by "generateDataset_ML.cpp".
+For each BSD, the transformation to its conformal geometry is executed by the BSO-toolbox. As a result, the input features and output targets are saved.
+
+Input text-files (features):
+*	“inputBSD.txt”
+*	“inputBSD_NumberEncoded.txt”
+*	“inputBSD_OneHotEncoded.txt”
+*	“cornerverticesBSD_ML.txt”
+
+Output text-files (targets):
+*	“outputCF.txt”
+
+#### "NeuralNetwork_TRAIN.cpp"
+The features (“inputBSD.txt”) and targets (“outputCF.txt”) are used as dataset to train the Neural network. Finally, a trained ML model is saved, which then can be used to make predictions of conformal models (see “NeuralNetwork_PREDICT.cpp”). Additionally, the loss (MSE) is calculated during the training process and saved in “mse.txt”.
+
+#### "NeuralNetwork_PREDICT.cpp"
+With the trained ML model (“trained_ML_model.xml”), a test building can be used as input to predict its conformal (CF) representation (“predictionCF.txt”).
+A test building ("test_inputBSD.txt") is added to the directory.
+
+#### "visualisation_ML.cpp"
+The predicted CF model can be visualised. The input for the visualisation is the “predictionCF.txt”-file. 
 
