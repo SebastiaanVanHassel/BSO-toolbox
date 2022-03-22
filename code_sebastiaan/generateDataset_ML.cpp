@@ -19,27 +19,27 @@
 using namespace std;
 using namespace Eigen;
 
-// The simulaton function uses the origin and dimensions vectors of the BSDs ("origin_dimensions_BSDs.txt") as input
+// The simulaton function uses the origin and dimensions vectors of the BSDs ("origin_dimensions_BSDs_ML.txt") as input
 // Via the BSO-toolbox, the BSDs are transformed into Conformal designs
 // INPUT:
-    // The input is saved in a new text file: "inputBSD.txt", and can be used as the input features in the Machine Learning process
-    // The inputBSD file can be enhanced by adding Number or One-hot Encoding: "inputBSD_NumberEncoded.txt", "inputBSD_OneHotEncoded.txt"
-    // In "cornerverticesBSD.txt", the BSDs are described by the corner-vertices of the quad-hexahedron spaces.
+    // The input is saved in a new text file: "inputBSD_ML.txt", and can be used as the input features in the Machine Learning process
+    // The inputBSD file can be enhanced by adding Number or One-hot Encoding: "inputBSD_NumberEncoded_ML.txt", "inputBSD_OneHotEncoded_ML.txt"
+    // In "cornerverticesBSD_ML.txt", the BSDs are described by the corner-vertices of the quad-hexahedron spaces.
 // OUTPUT:
     // The output is the Conformal (CF) model of each BSD, described by the corner-vertices of conformal cuboids
-    // Saved in "outputCF.txt"
+    // Saved in "outputCF_ML.txt"
 
 void simulation(string inputsFile, string transformation, string geometry, vector<string> typesIncluded )
 {
     // Read BSD origin and dimensions file
     string InputsLine;
-    ifstream Inputs(inputsFile);                // = "origin_dimensions_BSDs.txt"                                
+    ifstream Inputs(inputsFile);                // = "origin_dimensions_BSDs_ML.txt"                                
     ofstream msinput("ms_input_file.txt");                                   
-    ofstream inputBSDf("inputBSD.txt", ios::trunc);    
-    ofstream inputBSDf_OneHotEncoded("inputBSD_OneHotEncoded.txt", ios::trunc); 
-    ofstream inputBSDf_NumberEncoded("inputBSD_NumberEncoded.txt", ios::trunc);    
+    ofstream inputBSDf("inputBSD_ML.txt", ios::trunc);    
+    ofstream inputBSDf_OneHotEncoded("inputBSD_OneHotEncoded_ML.txt", ios::trunc); 
+    ofstream inputBSDf_NumberEncoded("inputBSD_NumberEncoded_ML.txt", ios::trunc);    
     ofstream cornerverticesBSDf("cornerverticesBSD_ML.txt", ios::trunc);                  
-    ofstream outputCFf("outputCF.txt", ios::trunc);
+    ofstream outputCFf("outputCF_ML.txt", ios::trunc);
     int r = 0;     
     int nlines = 0;      
 
@@ -81,7 +81,7 @@ void simulation(string inputsFile, string transformation, string geometry, vecto
                     dna += line;                                                  
                 }
                 dna.erase(dna.end()-1, dna.end());     
-                ofstream inputBSDf("inputBSD.txt", ios::app);
+                ofstream inputBSDf("inputBSD_ML.txt", ios::app);
                 inputBSDf << dna << endl;
                 inputBSDf.close();
 
@@ -102,8 +102,8 @@ void simulation(string inputsFile, string transformation, string geometry, vecto
                 int z1      = inputBSD_values[5];    int z2      = inputBSD_values[11];             
 
                 // Number encoding and One-hot encoding are applied on the dataset
-                ofstream inputBSDf_OneHotEncoded("inputBSD_OneHotEncoded.txt", ios::app); 
-                ofstream inputBSDf_NumberEncoded("inputBSD_NumberEncoded.txt", ios::app); 
+                ofstream inputBSDf_OneHotEncoded("inputBSD_OneHotEncoded_ML.txt", ios::app); 
+                ofstream inputBSDf_NumberEncoded("inputBSD_NumberEncoded_ML.txt", ios::app); 
                 int w, d, h, x, y, z;
                 if (x1 +  width1 ==  x2 +  width2) { w = 0; }     if (x1 +  width1 < x2 +  width2) { w = 1; }     if (x1 +  width1 > x2 +  width2) { w = 2; }
                 if (y1 +  depth1 ==  y2 +  depth2) { d = 0; }     if (y1 +  depth1 < y2 +  depth2) { d = 1; }     if (y1 +  depth1 > y2 +  depth2) { d = 2; }
@@ -224,7 +224,7 @@ void simulation(string inputsFile, string transformation, string geometry, vecto
 
     //-------------- CONFORMAL TRANSFORMATION --------------//
     //  Write targets to outputCF file (Conformal model described by corner-vertices)
-            ofstream outputCFf("outputCF.txt", ios::app);
+            ofstream outputCFf("outputCF_ML.txt", ios::app);
             if (transformation == "conformal")
             {
                 int ii = 0;
