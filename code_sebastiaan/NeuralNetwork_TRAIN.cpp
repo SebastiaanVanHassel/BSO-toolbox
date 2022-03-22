@@ -33,9 +33,9 @@ int main()
 {
 	// LOAD DATA
 	mat features;
-	data::Load("inputBSD.txt", features, false, true);
+	data::Load("inputBSD_ML.txt", features, false, true);
 	mat targets;
-	data::Load("outputCF.txt", targets, false, true);
+	data::Load("outputCF_ML.txt", targets, false, true);
 
 	// shuffle data
 	mat data = move(join_cols(features, targets));
