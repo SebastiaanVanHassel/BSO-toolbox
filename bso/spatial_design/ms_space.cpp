@@ -139,7 +139,7 @@ ms_space::ms_space(std::string line)
 		} 
 		else if (sDefMethod == "R" || sDefMethod == "r") //number_of_tokens = 7
 		{
-			std::cout << "dit is een try out" << std::endl;
+			//std::cout << "dit is een try out" << std::endl;
 			
 			mDimensions = *pVertex[0];
 			mCoordinates = *pVertex[1];
