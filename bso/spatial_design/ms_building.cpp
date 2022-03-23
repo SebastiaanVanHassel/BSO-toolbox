@@ -21,8 +21,8 @@ ms_building::ms_building()
 ms_building::ms_building(std::string fileName)
 :	insertFileName(fileName)
 { // initilization by string or text file
-	std::cout << "In ms file is the insertedFileName: " << insertFileName << std::endl;
-	std::cout << "In ms file is the insertedFileName: " << getInsertFileName() << std::endl;
+	//std::cout << "In ms file is the insertedFileName: " << insertFileName << std::endl;
+	//std::cout << "In ms file is the insertedFileName: " << getInsertFileName() << std::endl;
 	mLastSpaceID = 0;
 	std::ifstream input;
 	if (!fileName.empty()) input.open(fileName.c_str());
