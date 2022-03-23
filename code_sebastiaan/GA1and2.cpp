@@ -109,7 +109,7 @@ void generatePointCloud(    int nSpaces, vector<bso::utilities::geometry::quad_h
             }
         }
     }
-    cout << "total unique vertices in Point cloud (inside BSD spaces):    " << PointCloudv.size() << endl;
+    cout << "Total unique vertices in Point cloud (inside BSD spaces):    " << PointCloudv.size() << endl;
     PointCloud = PointCloudv; 
 }
 
@@ -474,7 +474,7 @@ void selection_GA1( vector<individual_GA1> mutated2_population_GA1,
         total_fitness = total_fitness + new_population_GA1[k].fitness_GA1();
     }
     double average_fitness = total_fitness/new_population_GA1.size();
-    cout << "Average fitness:                                  " << average_fitness << endl;
+    cout << "average fitness:                                  " << average_fitness << endl;
 }    
 
 // If an individual gains the maximum fitness score, it as a perfect quad-hexahedron
@@ -495,7 +495,7 @@ void get_perfect_Quad_Hexahedron(   vector<individual_GA1> population_GA1,
         perfect_Quad_Hexahedron.push_back(individual_GA1());
         perfect_Quad_Hexahedron[u].points8 = it->second ; 
         u++; }       
-    cout << "size of perfect unique population_GA1:        " << perfect_Quad_Hexahedron.size() << endl;
+    //cout << "size of perfect unique population_GA1:    " << perfect_Quad_Hexahedron.size() << endl;
 }           
 void save_perfect_Quad_Hexahedron( vector<individual_GA1> perfect_Quad_Hexahedron, 
                                    map< vector<vector<double>>, vector<vector<double>> > &saved_Quad_Hexahedrons_map,
@@ -505,7 +505,7 @@ void save_perfect_Quad_Hexahedron( vector<individual_GA1> perfect_Quad_Hexahedro
     { 
         saved_Quad_Hexahedrons_map[perfect_Quad_Hexahedron[n].points8] = perfect_Quad_Hexahedron[n].points8; 
     }
-    cout << "size of saved perfect unique objects:  " << saved_Quad_Hexahedrons_map.size() << endl;
+    cout << "saved perfect unique Quad-hexahedrons:     " << saved_Quad_Hexahedrons_map.size() << endl;
     typedef map< vector<vector<double>>, vector<vector<double>> > mapuType;
     int u = 0;
     for( mapuType::iterator it = saved_Quad_Hexahedrons_map.begin(); it != saved_Quad_Hexahedrons_map.end(); ++it )
@@ -962,7 +962,7 @@ int main(int argc, char *argv[])
     // Start evolution GA1
     while ( uniqueQHs > 1 )
     {
-        cout << "\ngeneration (" << g << ") " << endl;
+        cout << "\nGA1 generation (" << g << ") " << endl;
         perfect_Quad_Hexahedron.clear();
         saved_Quad_Hexahedrons.clear();
 
@@ -1049,9 +1049,10 @@ int main(int argc, char *argv[])
     vector<individual_GA2> perfect_CFmodel;
     
     // Start evolution (GA2)
+    cout << "\nStart GA2" << endl;
     while (CFmodelIsNotFound)
     {
-        cout << "! --- generation " << g2 << endl;
+        cout << "\n! --- GA2 generation " << g2 << endl;
 
         // Selection
         random_shuffle(population_GA2.begin(), population_GA2.end());
@@ -1114,6 +1115,13 @@ int main(int argc, char *argv[])
         }
     }
     
+    cout << "\nConformal model is found!" << endl;
+    cout << "generations GA2         = " << g2-1 << endl;
+    cout << "fitness Volume          = " << 0 << endl;
+    cout << "fitness Intersect       = " << 0 << endl;
+    cout << "nr. of quad-hexahedrons = " << perfect_CFmodel[0].CFquads(Quad_Hexahedrons).size() << endl;
     
+    cout << endl;
+
     return 0;
 }

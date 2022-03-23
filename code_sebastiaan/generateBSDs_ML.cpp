@@ -74,7 +74,7 @@ class spaceDimensions {
 // --- MAIN --- //
 int main(int argc, char *argv[])
 {   
-    std::cout << "Start BSD Generation" << std::endl;
+    std::cout << "\nStart BSD Generation" << std::endl;
 
     // Space 1  (min Width, max Width, min Depth, max Depth, min Height, max Height)
     // Define range of dimensions
@@ -174,6 +174,9 @@ int main(int argc, char *argv[])
         if (i < nBSDs*nrOfTypes - 1) { dataG << std::endl; }
         else if (i == nBSDs*nrOfTypes - 1) {}
     }
-    
+
+    std::cout << "\nText-file: 'origin_dimensions_BSDs_ML.txt' is created and can be used for 'generateDataset.cpp' " << std::endl;
+    std::cout << "\nEnd BSD Generation \n" << std::endl;
+
     return 0;
 }

@@ -300,14 +300,13 @@ void simulation(string inputsFile, string transformation, string geometry, vecto
         }
     }
     Inputs.close();
-
-    cout << "\n" << "End of simulations" << endl;    
+ 
 }
-
 
 // --- MAIN --- //
 int main(int argc, char* argv[])
 {
+  cout << "\nStart Dataset Generation" << endl;   
   //---Simulation---//
   // DEFAULT:
   //    Input file          = "origin_dimensions_BSDs.txt"
@@ -315,4 +314,13 @@ int main(int argc, char* argv[])
   //    Geometry entity     = "cuboid"
   //    {types included}    = {"top", "front", "behind", "left", "right"}
   simulation("origin_dimensions_BSDs_ML.txt", "conformal", "cuboid", {"top", "front", "behind", "left", "right"} );
+
+  cout << "\nDataset created: " << endl;   
+    cout << " 'inputBSD_ML.txt' "  << endl; 
+    cout << " 'inputBSD_OneHotEncoded_ML.txt' " << endl; 
+    cout << " 'inputBSD_NumberEncoded_ML.txt' " << endl; 
+    cout << " 'cornerverticesBSD_ML.txt'  "    << endl;         
+    cout << " 'outputCF_ML.txt' " << endl; 
+
+  cout << "\nEnd Dataset Generation \n" << endl;   
 }
