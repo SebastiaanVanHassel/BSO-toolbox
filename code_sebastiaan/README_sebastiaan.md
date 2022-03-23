@@ -15,7 +15,7 @@ The files, “construction.cpp” and “structure.cpp”, are modified to solve
 The file, “quad_hexahedron.hpp”, is modified by the author, to the purpose of his thesis. 
 
 ## C++ Code written by Sebastiaan for his Graduation thesis
-The code consists of two individual parts with respect to the research methods: Machine Learning (ML) and Genetic Algorithm (GA). The code is written in C++14 and uses external libraries in some of the files. An overview of all created C++ files is listed below. (File name, for which research method, on what operating system, and which external libraries are included.)
+The code is related to the two research methods: Machine Learning (ML) and Genetic Algorithm (GA). The code is written in C++14 and uses external libraries in some of the files. An overview of all created C++ files is listed below. (File name, for which research method, on what operating system, and which external libraries are included.)
 
 | File name	                | Method	     | Operating system	  | Includes BSO-toolbox	| Includes Eigen	| Includes OpenGL	  | Includes mlpack |
 | ---												|	---					 | ---								| ---			  						| ---							| ---								| ---						  |
@@ -31,7 +31,10 @@ The code consists of two individual parts with respect to the research methods: 
 Most of the files make use of a Linux operating system. These files are compiled on a server at the University. The two Neural Network files, which include the mlpack C++ library make use of a Windows operating system. The mlpack library is not installed on the server of the University and therefore, installed and used on the personal computer (Windows OS) of the author.
 
 #### External software
-Overview of external software:
+The code is mainly based on two external software packages: BSO-toolbox and mlpack C++ library.
+Other external libraries are included within these two software installations.
+
+An overview of all external software is listed below. The reference to the documentation and installation guide, as well as, the used versions of all libraries are indicated.
 *	BSO-toolbox developed at Eindhoven University of Technology
 	-	See https://github.com/TUe-excellent-buildings/BSO-toolbox for documentation and installation guide.
 	-	Version = v1.0.0
