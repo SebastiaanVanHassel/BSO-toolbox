@@ -103,6 +103,8 @@ Input text-files (features):
 Output text-files (targets):
 *	“outputCF_ML.txt”
 
+For this example, the “inputBSD_ML.txt” file is used for the features, and the “outputCF_ML.txt” file is used for the targets. When the features need to be, for example One-hot encoded, the “inputBSD_OneHotEncoded_ML.txt” file is used as input.
+
 ### "NeuralNetwork_TRAIN.cpp"
 The resulting text-files from previous C++ file are copied and pasted to the Visual Studio 19 project on Windows 10 OS, where all the dependencies of mlpack library are installed.
 The features (“inputBSD_ML.txt”) and targets (“outputCF_ML.txt”) are used as dataset to train the Neural network. Finally, a trained ML model is saved, which then can be used to make predictions of conformal models (see “NeuralNetwork_PREDICT.cpp”). Additionally, the loss (MSE) is calculated during the training process and saved in “MSE.txt”.
