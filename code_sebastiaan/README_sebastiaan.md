@@ -2,7 +2,7 @@
 
 This readme elaborates the software that is used for the graduation thesis of Sebastiaan van Hassel. In GitHub, a fork is made of the BSO-toolbox repository from TUe-excellent-buildings. In this fork, a new bracnch is created, called 'sebastiaan_changes', where all the necessary files are modified or added. During the graduation project, seven files of the BSO-toolbox v1.0.0 are modified and listed in this bracnch. Furthermore, the folder 'code_sebastiaan' includes all files written for the corresponding thesis. 
 
-The MSc. Thesis of Sebastiaan van Hassel [1] with title: "Machine learning and Genetic Algorithms for conformal geometries in design support systems", presents research on whether Machine Learning (ML) and Genetic Algorithms (GA) can be used to obtain a conformal geometry for BSDs. To optimise both building designs and their underlying design processes, design support systems exist. For domain specific analyses, these systems benefit from a conformal (CF) representation for the Building Spatial Design (BSD). In a conformal representation, for all entities: the vertices of an entity are, if intersecting an-other entity, only allowed to coincide with this other entity's vertices. 
+The MSc thesis of Sebastiaan van Hassel [1] with title: "Machine learning and Genetic Algorithms for conformal geometries in design support systems", presents research on whether Machine Learning (ML) and Genetic Algorithms (GA) can be used to obtain a conformal geometry for BSDs. To optimise both building designs and their underlying design processes, design support systems exist. For domain specific analyses, these systems benefit from a conformal (CF) representation for the Building Spatial Design (BSD). In a conformal representation, for all entities: the vertices of an entity are, if intersecting an-other entity, only allowed to coincide with this other entity's vertices. 
 
 [1] van Hassel, S.J.F. (2022). *Machine learning and Genetic Algorithms for conformal geometries in design support systems.* (MSc thesis). Eindhoven, The Netherlands: Eindhoven University of Technology.
 
@@ -81,12 +81,29 @@ An overview of all external software is listed below. The reference to the docum
 
 
 #### Input text-files
-Furthermore, the directory of code_sebastiaan contains two initial text-files: "input_BSD_ML.txt" and "cornerverticesBSD_GA.txt". These files are used as input for the two methods to predict the conformal representation of Test building 'A' and Test building 'A-O', as described in the analysis of the related MSc. Thesis.
+Furthermore, the directory of code_sebastiaan contains two initial text-files: "input_BSD_ML.txt" and "cornerverticesBSD_GA.txt". These files are used as input for the two methods to predict the conformal representation of Test building 'A' and Test building 'A-O', as described in the analysis of the related MSc thesis.
 
 | Test Building	   | Input file	    			       | Method	   |
 | ---						   |	---					 				       | ---			 |
 | 'A'	             | "input_BSD_ML.txt"	         | ML			   |
 | 'A-0'	           | "cornerverticesBSD_GA.txt"	 | GA	       |
+
+##### Test Building 'A'
+![image](https://user-images.githubusercontent.com/101708661/160603980-30770b51-65e3-4073-8754-7701bd8795c8.png)
+
+"test_inputBSD_ML.txt":
+* 6000,6000,3000,10000,10000,0,6000,6000,5000,16000,12000,0
+
+Corresponds to BSD:
+* R, 1, 6000, 6000, 3000, 10000, 10000, 0, A
+* R, 2, 6000, 6000, 5000, 16000, 12000, 0, A
+
+##### Test Building 'A-O'
+![image](https://user-images.githubusercontent.com/101708661/160610241-64051a2f-0d6e-4018-876f-46096729c39f.png)
+
+"cornerverticesBSD_GA.txt":
+* N, 1, 10,10,0, 16,10,0, 16,16,0, 10,16,0, 10,10,3, 16,10,3, 16,16,3, 10,16,3
+* N, 2, 16,12,0, 22,12,0, 22,18,0, 16,18,0, 16,12,5, 22,12,5, 22,18,5, 16,18,5
 
 
 ## Machine Learning (ML)
@@ -114,9 +131,18 @@ The “origin_dimensions_BSDs_ML.txt” file consists of multiple buildings. How
 
 Which indicates: R, space ID, dimensions vector (width, depth, height), origin vector (x, y, z), A
 
+##### Example
 For the example, the file "generateBSDs_ML.cpp" generates 100 BSDs with 2 spaces for each variant: "top", "front", "behind", "left", "right".
 The width and depth range between 4000 - 8000 mm, and the height ranges between 2000 - 6000 mm.
 
+The file can be compiled by typing the following command in the terminal:
+```
+make clean design
+```
+The file can be executed by typing the following command in the terminal:
+```
+./bsd
+```
 
 ### "generateDataset_ML.cpp"
 A dataset with input features (BSDs) and output targets (conformal models) can be created by "generateDataset_ML.cpp".
@@ -132,18 +158,47 @@ Input text-files (features):
 Output text-files (targets):
 *	“outputCF_ML.txt”										describes the CF model by corner-vertices of each cuboid.
 
+##### Example
 For the example, the “inputBSD_ML.txt” file is used for the features, and the “outputCF_ML.txt” file is used for the targets. When the features need to be, for example One-hot encoded, the “inputBSD_OneHotEncoded_ML.txt” file is used as input.
+
+The file can be compiled by typing the following command in the terminal:
+```
+make clean data
+```
+The file can be executed by typing the following command in the terminal:
+```
+./dataset
+```
 
 ### "NeuralNetwork_TRAIN.cpp"
 The resulting text-files from previous C++ file are copied and pasted to the Visual Studio 19 project on Windows 10 OS, where all the dependencies of mlpack library are installed.
 The features (“inputBSD_ML.txt”) and targets (“outputCF_ML.txt”) are used as dataset to train the Neural network. Finally, a trained ML model is saved, which then can be used to make predictions of conformal models (see “NeuralNetwork_PREDICT.cpp”). Additionally, the loss (MSE) is calculated during the training process and saved in “MSE.txt”.
 
+##### Example
+For the example, a neural network with one hidden layer and 180 neurons is trained on “inputBSD_ML.txt” as features and “outputCF_ML.txt” as targets. The C++ files and text-files should be located in the same folder in the Visual Studio project. The trained ML model is also saved in the same folder as XML file: “trained_ML_model.xml”.
+
 ### "NeuralNetwork_PREDICT.cpp"
 With the trained ML model (“trained_ML_model.xml”), a test building can be used as input to predict its conformal (CF) representation (“predictionCF_ML.txt”).
-Test building 'A', as used in the MSc. Thesis, is described in "test_inputBSD_ML.txt" and added to the directory.
+
+##### Example
+For the example, test building 'A' is used to predict its conformal representation. Test building 'A' is described by "test_inputBSD_ML.txt", and should be placed in the same folder.
+
 
 ### "visualisation_ML.cpp"
+The predicted CF models can be visualised by "visualisation_ML.cpp" to compare the actual conformal model and its prediction.
+
+##### Example
 The predicted CF model of test building 'A' is visualised below. The input for the visualisation is the “predictionCF_ML.txt”-file. 
+
+The file can be compiled by typing the following command in the terminal:
+```
+make clean viml
+```
+The file can be executed by typing the following command in the terminal:
+```
+./visualML
+```
+
 ![image](https://user-images.githubusercontent.com/101708661/159496119-2ffb1bb1-bc09-47d9-8daf-b05120774279.png)
 
 
@@ -156,13 +211,7 @@ The GA code consists of two individual C++ files. One for the both GAs, and one 
 Both GAs are structured in the same file. The simulations of GA1 and GA2 are ran in succession. 
 
 #### Input and output files
-The corner-vertices (p) of the spaces of a BSD (“cornerverticesBSD_GA.txt”) are used as input for the GA. In the example, Test building 'A-O' from the MSc. Thesis is used to make conformal by the GA.
-
-Test building 'A-O' is described in the text-file “cornerverticesBSD_GA.txt” as follows:
-*  N,	1,	10,10,0,  16,10,0,  16,16,0,  10,16,0,  10,10,3,  16,10,3,  16,16,3,  10,16,3
-*  N,	2,	16,12,0,  22,12,0,  22,18,0,  16,18,0,  16,12,5,  22,12,5,  22,18,5,  16,18,5
-
-In this example, the dimensions and coordinates of the test building are indicated in meters.
+The corner-vertices (p) of the spaces of a BSD (“cornerverticesBSD_GA.txt”) are used as input for the GA. 
 
 If a perfect conformal geometry is found by the GA, it is saved in “cf.txt”-file, and can be used for visualisation. Additionally, the BSD corner-vertices are saved in “bsd.txt”, and the point cloud is saved in “pnts.txt”. All can be used as input for “visualisation_GA.cpp”.
 
@@ -175,7 +224,7 @@ Output text-files:
 *	“cf.txt”
 
 #### User-defined parameters
-Parameters exist in both GAs that can be changed by the user. The default values for this example are listed below.
+Parameters exist in both GAs that can be changed by the user. The default values for following example are listed below.
 
 For GA1:
 * initial Population (N)   = 512
@@ -189,7 +238,24 @@ For GA2:
 * mutation rate individual = 1			(nr. of bit flips in chromosome)
 
 
-#### Results
+##### Example
+In the example, Test building 'A-O' from the MSc thesis is used to make conformal by the GA.
+
+Test building 'A-O' is described in the text-file “cornerverticesBSD_GA.txt” as follows:
+*  N,	1,	10,10,0,  16,10,0,  16,16,0,  10,16,0,  10,10,3,  16,10,3,  16,16,3,  10,16,3
+*  N,	2,	16,12,0,  22,12,0,  22,18,0,  16,18,0,  16,12,5,  22,12,5,  22,18,5,  16,18,5
+
+In this example, the dimensions and coordinates of the test building are indicated in meters.
+
+The file can be compiled by typing the following command in the terminal:
+```
+make clean ga
+```
+The file can be executed by typing the following command in the terminal:
+```
+./algo
+```
+
 Finally, Test building 'A-O' is made conformal by the Genetic Algortihm file "GA1and2.cpp". The results are listed below.
 
 | Test building	    | generations GA1 | generations GA2 | nr. of quad-hexahedrons in CF model |
@@ -199,7 +265,18 @@ Finally, Test building 'A-O' is made conformal by the Genetic Algortihm file "GA
 
 ### "visualisation_GA.cpp"
 The BSD, point cloud, and conformal model can be visualised. The input for the visualisation is the “bsd.txt”, “pnts.txt”, or “cf.txt” text-file.
-In the figure below, one can see the generated conformal model by the GA ("cf.txt") and point cloud ("pnts.txt").
+
+##### Example
+The conformal model of Test Building 'A-O' is shown in the figure below. One can see the generated conformal model by the GA ("cf.txt") and point cloud ("pnts.txt").
+
+The file can be compiled by typing the following command in the terminal:
+```
+make clean viga
+```
+The file can be executed by typing the following command in the terminal:
+```
+./visualGA
+```
 
 ![image](https://user-images.githubusercontent.com/101708661/159507167-03b1b30b-f98a-4ce1-a9d1-28add9d59f17.png)
 
