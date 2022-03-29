@@ -1,8 +1,10 @@
 # README: Sebastiaan van Hassel Graduation thesis 2022
 
-This readme elaborates the software that is used for the graduation thesis of Sebastiaan van Hassel. In GitHub, a fork is made of the BSO-toolbox repository from TUe-excellent-buildings. In this fork, a new bracnch is created, called 'sebastiaan_changes', where all the necessary files are modified or added. During the graduation project, seven files of the BSO-toolbox v1.0.0 are modified and listed in this bracnch. Furthermore, the folder 'code_sebastiaan' includes all files written by the author of the corresponding thesis. 
+This readme elaborates the software that is used for the graduation thesis of Sebastiaan van Hassel. In GitHub, a fork is made of the BSO-toolbox repository from TUe-excellent-buildings. In this fork, a new bracnch is created, called 'sebastiaan_changes', where all the necessary files are modified or added. During the graduation project, seven files of the BSO-toolbox v1.0.0 are modified and listed in this bracnch. Furthermore, the folder 'code_sebastiaan' includes all files written for the corresponding thesis. 
 
-The MSc. Thesis of Sebastiaan van Hassel with title: "Machine learning and Genetic Algorithms for conformal geometries in design support systems", presents research on whether Machine Learning (ML) and Genetic Algorithms (GA) can be used to obtain a conformal geometry for BSDs. To optimise both building designs and their underlying design processes, design support systems exist. For domain specific analyses, these systems benefit from a conformal (CF) representation for the Building Spatial Design (BSD). In a conformal representation, for all entities: the vertices of an entity are, if intersecting an-other entity, only allowed to coincide with this other entity's vertices.
+The MSc. Thesis of Sebastiaan van Hassel [1] with title: "Machine learning and Genetic Algorithms for conformal geometries in design support systems", presents research on whether Machine Learning (ML) and Genetic Algorithms (GA) can be used to obtain a conformal geometry for BSDs. To optimise both building designs and their underlying design processes, design support systems exist. For domain specific analyses, these systems benefit from a conformal (CF) representation for the Building Spatial Design (BSD). In a conformal representation, for all entities: the vertices of an entity are, if intersecting an-other entity, only allowed to coincide with this other entity's vertices. 
+
+[1] van Hassel, S.J.F. (2022). *Machine learning and Genetic Algorithms for conformal geometries in design support systems.* (MSc thesis). Eindhoven, The Netherlands: Eindhoven University of Technology.
 
 
 ## Modified C++ files in the BSO-toolbox v1.0.0
@@ -114,6 +116,7 @@ Which indicates: R, space ID, dimensions vector (width, depth, height), origin v
 
 For the example, the file "generateBSDs_ML.cpp" generates 100 BSDs with 2 spaces for each variant: "top", "front", "behind", "left", "right".
 The width and depth range between 4000 - 8000 mm, and the height ranges between 2000 - 6000 mm.
+
 
 ### "generateDataset_ML.cpp"
 A dataset with input features (BSDs) and output targets (conformal models) can be created by "generateDataset_ML.cpp".
