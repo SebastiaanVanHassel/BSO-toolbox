@@ -118,6 +118,7 @@ See figure below for an overview of all C++ files, input and output text-files, 
 
 ![image](https://user-images.githubusercontent.com/101708661/160603712-bd65a2c4-db03-4c1d-95c9-b5709ed43da3.png)
 
+Besides the explanations, an example to run is added, where Test Building 'A' from the corresponding Msc thesis, will be made conformal by a trained Machine Learning model. Therefore, first a dataset needs to be created with the files: "generateBSDs_ML.cpp" and "generateDataset_ML.cpp". Secondly, a ML model is trained using the created dataset and the file: "NeuralNetwork_TRAIN.cpp” and saved afterwards to make predictions with "NeuralNetwork_PREDICT.cpp”. Finally, a prediction of the conformal model can be visualised using "visualisation_ML.cpp".
 
 ### "generateBSDs_ML.cpp"
 The ML method starts with "generateBSDs_ML.cpp" to define a wide range of building configurations. 
@@ -206,6 +207,8 @@ The file can be executed by typing the following command in the terminal:
 The GA code consists of two individual C++ files. One for the both GAs, and one for the visualisation of the BSD and CF model.  First, "GA1and2.cpp" is executed to run the evolutionary process and to find a conformal representation of the input BSD. Secondly, "visualisation_GA.cpp" can be executed to visualise the generated conformal model by the GA.
 
 ![image](https://user-images.githubusercontent.com/101708661/160578064-c244c549-5fe8-4060-9721-ea4b3364c358.png)
+
+Also for the GA method, an example to run is added. Here test building 'A-O' is used as input to make conformal by the GA.
 
 ### "GA1and2.cpp"
 Both GAs are structured in the same file. The simulations of GA1 and GA2 are ran in succession. 
