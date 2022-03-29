@@ -1,5 +1,8 @@
 # README: Sebastiaan van Hassel Graduation thesis 2022
 
+This readme elaborates the software that is used for the graduation thesis of Sebastiaan van Hassel. In GitHub, a fork is made of the BSO-toolbox repository from TUe-excellent-buildings. In this fork, a new bracnch is created, called 'sebastiaan_changes', where all the necessary files are listed, including this readme. During the graduation project, seven files of the BSO-toolbox v1.0.0 are modified and listed in this bracnch. Furthermore, the folder 'code_sebastiaan' includes all files written by the autor of the corresponding thesis.
+
+
 ## Modified C++ files in the BSO-toolbox v1.0.0
 The BSO-toolbox repository from TUe-excellent-buildings is used in the graduation project of Sebastiaan van Hassel. Thereby, seven files of the BSO-toolbox v1.0.0 are modified. It concerns the following files with directories:
 1.   BSO-toolbox/bso/spatial_design/ms_building.cpp
@@ -28,7 +31,20 @@ The code is related to the two research methods: Machine Learning (ML) and Genet
 | Visualisation_GA.cpp	    | GA	         | Linux			        |                       |                 |          x				|									|
 
 #### Operating system
-Most of the files make use of a Linux operating system. These files are compiled on a server at the University. The two Neural Network files, which include the mlpack C++ library make use of a Windows operating system. The mlpack library is not installed on the server of the University and therefore, installed and used on the personal computer (Windows OS) of the author.
+Most of the files are compiled for a Linux operating system using GCC C++ compiler version 9.4.0.
+The two Neural Network files, which include the mlpack C++ library are compiled for a Windows operating system. These two files are compiled and ran via Visual Studio Community 2019 version 16.8.4 using MSVC compiler version 14.28. The files in folder code_sebastiaan are further separated in two folders, based on their operating system (Linux and Windows).
+
+#### Makefile (Linux)
+A makefile has been added to the Linux folder, which can be used to compile the code for Linux operating system. In the makefile, check if the dependencies (Eigen, Boost and BSO-toolbox) are linked to the locations of your local machine. 
+
+The files can be compiled and ran by typing the following commands in the terminal:
+| File name	                | Compile	     					 | Run	  			 |
+| ---												|	---					 				   | ---					 |
+| generateBSDs_ML.cpp	      | make clean design	     | ./bsd			   |
+| generateDataset_ML.cpp	  | make clean data		     | ./dataset	   |
+| Visualisation_ML.cpp	    | make clean viml	       | ./visualML	   |
+| GA1and2.cpp	              | make clean ga	         | ./algo	       |
+| Visualisation_GA.cpp	    | make clean viga	       | ./visualGA    |
 
 #### External software
 The code is mainly based on two external software packages: BSO-toolbox and mlpack C++ library.
@@ -54,17 +70,6 @@ An overview of all external software is listed below. The reference to the docum
 		*	Ensmallen C++ numerical optimization library (v2.14.2)
 		*	Boost C++ library (v1.75.0)
 
-#### Makefile (Linux)
-A make file has been added to the directory of code_sebastiaan, which can be used to compile the code that use Linux operating system. In the makefile, check if the dependencies (Eigen, Boost and BSO-toolbox) are linked to the locations of your local machine. 
-
-The files can be compiled and ran by typing the following commands in the terminal:
-| File name	                | Compile	     					 | Run	  			 |
-| ---												|	---					 				   | ---					 |
-| generateBSDs_ML.cpp	      | make clean design	     | ./bsd			   |
-| generateDataset_ML.cpp	  | make clean data		     | ./dataset	   |
-| Visualisation_ML.cpp	    | make clean viml	       | ./visualML	   |
-| GA1and2.cpp	              | make clean ga	         | ./algo	       |
-| Visualisation_GA.cpp	    | make clean viga	       | ./visualGA    |
 
 #### Input text-files
 Furthermore, the directory of code_sebastiaan contains two initial text-files: "input_BSD_ML.txt" and "cornerverticesBSD_GA.txt". These files are used as input for the two methods to predict the conformal representation of Test building 'A' and Test building 'A-O', as described in the analysis of the related MSc. Thesis.
@@ -81,7 +86,9 @@ The machine learning code consists of five C++ files, which are compiled separat
 
 See figure below for an overview of all C++ files, input and output files and the used libraries.
 
-![image](https://user-images.githubusercontent.com/101708661/159500771-6991e3d3-a303-4eb0-bdab-93b7b959865a.png)
+![image](https://user-images.githubusercontent.com/101708661/160578215-5f476fe3-0f9f-44a7-a6cc-9838cdbaa38f.png)
+
+
 
 ### "generateBSDs_ML.cpp"
 The ML method starts with "generateBSDs_ML.cpp" to define a wide range of building configurations. 
@@ -119,10 +126,9 @@ The predicted CF model of test building 'A' is visualised below. The input for t
 
 
 ## Example Genetic Algorithm (GA)
-The GA code consists of two C++ files, which are compiled separately. One for the both GAs, and one for the visualisation of the BSD and CF model.  
+The GA code consists of two individual C++ files. One for the both GAs, and one for the visualisation of the BSD and CF model.  First, "GA1and2.cpp" is executed to run the evolutionary process and to find a conformal representation of the input BSD. Secondly, "visualisation_GA.cpp" can be executed to visualise the generated conformal model by the GA.
 
-![image](https://user-images.githubusercontent.com/101708661/159501430-a6ce70a4-9ff6-4f2c-9e3d-e29ebef1d29e.png)
-
+![image](https://user-images.githubusercontent.com/101708661/160578064-c244c549-5fe8-4060-9721-ea4b3364c358.png)
 
 ### "GA1and2.cpp"
 Both GAs are structured in the same file. The simulations of GA1 and GA2 are ran in succession. 
