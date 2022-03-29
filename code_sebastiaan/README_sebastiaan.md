@@ -99,7 +99,7 @@ The machine learning code consists of five individual C++ files. The filenames a
 
 See figure below for an overview of all C++ files, input and output text-files, used libraries, and operating system.
 
-![image](https://user-images.githubusercontent.com/101708661/160578215-5f476fe3-0f9f-44a7-a6cc-9838cdbaa38f.png)
+![image](https://user-images.githubusercontent.com/101708661/160603712-bd65a2c4-db03-4c1d-95c9-b5709ed43da3.png)
 
 
 ### "generateBSDs_ML.cpp"
